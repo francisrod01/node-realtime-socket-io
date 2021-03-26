@@ -15,13 +15,16 @@ const tech = io.of('/tech');
 
 // listening connection from the client.
 tech.on('connection', (socket) => {
-  console.log('User connected.');
+  socket.on('join', (data) => {
+    socket.join(data.room);
+    tech.in(data.room).emit('message', `New user joined ${data.room} room!`);
+  });
 
-  socket.on('message', (msg) => {
-    console.log(`message: ${msg}`);
+  socket.on('message', (data) => {
+    console.log(`message: ${data.msg}`);
 
     // emit the message back to user screen.
-    tech.emit('message', msg);
+    tech.in(data.room).emit('message', data.msg);
   });
 
   socket.on('disconnect', () => {

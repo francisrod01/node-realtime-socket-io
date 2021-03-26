@@ -65,10 +65,13 @@
 
   <script src="/socket.io/socket.io.js"></script>
   <script>
+    const room = 'javascript';
     const socket = io('/tech');
     $('form').submit(() => {
+      const msg = $('#m').val();
+
       // Get the message from input value.
-      socket.emit('message', $('#m').val());
+      socket.emit('message', { msg, room });
 
       // Clearing the input value.
       $('#m').val('');
@@ -79,7 +82,7 @@
 
     socket.on('connect', () => {
       // emiting to everybody.
-      socket.emit('message', 'user connected.');
+      socket.emit('join', { room });
     });
 
     socket.on('message', (msg) => {
