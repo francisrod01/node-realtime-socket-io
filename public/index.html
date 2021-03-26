@@ -65,7 +65,7 @@
 
   <script src="/socket.io/socket.io.js"></script>
   <script>
-    const socket = io();
+    const socket = io('/tech');
     $('form').submit(() => {
       // Get the message from input value.
       socket.emit('message', $('#m').val());
