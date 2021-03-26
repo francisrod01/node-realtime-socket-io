@@ -15,6 +15,14 @@ app.get('/javascript', (req, res) => {
   res.sendFile(__dirname + '/public/javascript.html');
 });
 
+app.get('/css', (req, res) => {
+  res.sendFile(__dirname + '/public/css.html');
+});
+
+app.get('/swift', (req, res) => {
+  res.sendFile(__dirname + '/public/swift.html');
+});
+
 const tech = io.of('/tech');
 
 // listening connection from the client.
